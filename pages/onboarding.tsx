@@ -1,18 +1,8 @@
 import AccountProfile from "@/components/forms/AccountProfile";
-import { currentUser } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/dist/types/server";
-import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
-const Page = () => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await currentUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
+const Onboarding = () => {
+  const { user, isLoaded } = useUser();
 
   const userInfo = {};
   const userData = {
@@ -24,6 +14,9 @@ const Page = () => {
     image: userInfo?.image || user?.imageUrl,
   };
 
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
   return (
     <main className="flex flex-col justify-start max-w-3xl px-10 py-20 mx-auto">
       <h1 className="head-text">Onboarding</h1>
@@ -37,4 +30,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Onboarding;

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-dark-1;
+}
+
 @layer components {
   /* main */
   .main-container {

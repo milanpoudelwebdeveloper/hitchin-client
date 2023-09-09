@@ -33,7 +33,7 @@ interface Props {
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
   const [file, setFile] = useState<File[]>([]);
-  const { startUpload } = useUploadThing("media" as any);
+  const { startUpload } = useUploadThing("media");
 
   const { mutate } = useMutation(updateUser, {
     onSuccess: (data) => {
@@ -90,6 +90,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       fileReader.readAsDataURL(file);
     }
   };
+
   return (
     <Form {...form}>
       <form
